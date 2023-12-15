@@ -1,4 +1,4 @@
-db = db.getSiblingDB('4videos');
+db = db.getSiblingDB('4movies');
 
 
 db.createCollection("videos");
