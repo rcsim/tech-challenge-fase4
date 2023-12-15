@@ -9,6 +9,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: yU1T55xcVR
     ports:
       - "27017:27017"
+    volumes:
+      - ./schema.js:/docker-entrypoint-initdb.d/schema.js
 
 
   app:
@@ -16,7 +18,7 @@ services:
       - mongo
     build: .
     environment:
-      - spring.data.mongodb.uri=mongodb://4videos:yU1T55xcVR@mongo:27017/videos
+      - spring.data.mongodb.uri=mongodb://4videos:yU1T55xcVR@mongo:27017/4videos
       - SPRING_PROFILES_ACTIVE=dev
     ports:
       - "8080:8080"
