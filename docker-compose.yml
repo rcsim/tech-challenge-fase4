@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 4movies
+      MONGO_INITDB_ROOT_PASSWORD: yU1T55xcVR
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./schema.js:/docker-entrypoint-initdb.d/schema.js
+
+
+  app:
+    depends_on:
+      - mongo
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://4movies:yU1T55xcVR@mongo:27017/4movies
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8080:8080"
+
+networks:
+  my-networks:
+    driver: bridge
