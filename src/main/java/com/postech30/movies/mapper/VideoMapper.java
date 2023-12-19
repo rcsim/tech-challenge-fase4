@@ -12,6 +12,7 @@ public class VideoMapper {
                 .description(video.getDescription())
                 .url(video.getUrl())
                 .publishDate(video.getPublishDate())
+                .views(video.getViews())
                 .build();
     }
 
@@ -21,7 +22,8 @@ public class VideoMapper {
                 videoDTO.getTitle(),
                 videoDTO.getDescription(),
                 videoDTO.getUrl(),
-                videoDTO.getPublishDate()
+                videoDTO.getPublishDate(),
+                videoDTO.getViews()
         );
     }
 }

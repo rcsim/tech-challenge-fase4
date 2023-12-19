@@ -22,5 +22,6 @@ public class Video {
     private String description;
     private String url;
     private LocalDate publishDate;
+    private Long views;
 
 }

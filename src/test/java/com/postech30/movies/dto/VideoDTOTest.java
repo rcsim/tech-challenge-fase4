@@ -49,7 +49,7 @@ class VideoDTOTest {
      * Methods under test:
      *
      * <ul>
-     *   <li>{@link VideoDTO#VideoDTO(String, String, String, String, LocalDate)}
+     *   <li>{@link VideoDTO#VideoDTO(String, String, String, String, LocalDate, Long)}
      *   <li>{@link VideoDTO#setDescription(String)}
      *   <li>{@link VideoDTO#setId(String)}
      *   <li>{@link VideoDTO#setPublishDate(LocalDate)}
@@ -65,7 +65,7 @@ class VideoDTOTest {
     @Test
     void testConstructor2() {
         VideoDTO actualVideoDTO = new VideoDTO("42", "Dr", "The characteristics of someone or something",
-                "https://example.org/example", LocalDate.of(1970, 1, 1));
+                "https://example.org/example", LocalDate.of(1970, 1, 1), 100L);
         actualVideoDTO.setDescription("The characteristics of someone or something");
         actualVideoDTO.setId("42");
         LocalDate publishDate = LocalDate.of(1970, 1, 1);

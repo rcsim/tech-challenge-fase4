@@ -34,14 +34,17 @@ class VideoTest {
         actualVideo.setPublishDate(publishDate);
         actualVideo.setTitle("Dr");
         actualVideo.setUrl("https://example.org/example");
+        actualVideo.setViews(100L);
         String actualDescription = actualVideo.getDescription();
         String actualId = actualVideo.getId();
         LocalDate actualPublishDate = actualVideo.getPublishDate();
         String actualTitle = actualVideo.getTitle();
+        Long actualViews = actualVideo.getViews();
         assertEquals("42", actualId);
         assertEquals("Dr", actualTitle);
         assertEquals("The characteristics of someone or something", actualDescription);
         assertEquals("https://example.org/example", actualVideo.getUrl());
+        assertEquals(100, actualViews);
         assertSame(publishDate, actualPublishDate);
     }
 
@@ -49,7 +52,7 @@ class VideoTest {
      * Methods under test:
      *
      * <ul>
-     *   <li>{@link Video#Video(String, String, String, String, LocalDate)}
+     *   <li>{@link Video#Video(String, String, String, String, LocalDate, Long)}
      *   <li>{@link Video#setDescription(String)}
      *   <li>{@link Video#setId(String)}
      *   <li>{@link Video#setPublishDate(LocalDate)}
@@ -65,7 +68,7 @@ class VideoTest {
     @Test
     void testConstructor2() {
         Video actualVideo = new Video("42", "Dr", "The characteristics of someone or something",
-                "https://example.org/example", LocalDate.of(1970, 1, 1));
+                "https://example.org/example", LocalDate.of(1970, 1, 1), 100L);
         actualVideo.setDescription("The characteristics of someone or something");
         actualVideo.setId("42");
         LocalDate publishDate = LocalDate.of(1970, 1, 1);
