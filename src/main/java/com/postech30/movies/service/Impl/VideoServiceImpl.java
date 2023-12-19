@@ -32,7 +32,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public Mono<VideoDTO> getVideoByTitle(String title) {
-        Mono<Video> videoMono = videoRepository.findByTitle(title);
+        Mono<Video> videoMono = videoRepository.findByTitleIgnoreCaseContaining(title);
         return videoMono.map(VideoMapper::mapToVideoDTO);
     }
 

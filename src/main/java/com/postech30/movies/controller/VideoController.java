@@ -36,14 +36,14 @@ public class VideoController {
 
     @Operation(summary = "Busca de vídeo por título", description = "Busca o vídeo na base de dados do sistema.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Vídeo encontrado na base de dados do sistema."), @ApiResponse(responseCode = "400", description = "Request incorreto"), @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
-    @GetMapping(value = "{title}")
+    @GetMapping(value = "title/{title}")
     public Mono<VideoDTO> getVideoByTitle(@PathVariable("title") String title) {
         return videoService.getVideoByTitle(title);
     }
 
     @Operation(summary = "Busca de vídeo por data da publicação", description = "Busca o vídeo na base de dados do sistema.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Vídeos encontrados na base de dados do sistema."), @ApiResponse(responseCode = "400", description = "Request incorreto"), @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
-    @GetMapping(value = "{publishDate}")
+    @GetMapping(value = "publishDate/{publishDate}")
     public Flux<VideoDTO> getVideoByPublishDate(@PathVariable("publishDate") LocalDate publishDate) {
         return videoService.getVideoByPublishDate(publishDate);
     }

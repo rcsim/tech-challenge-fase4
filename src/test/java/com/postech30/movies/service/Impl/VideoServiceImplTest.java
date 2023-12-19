@@ -90,9 +90,9 @@ class VideoServiceImplTest {
     @Test
     void testGetVideoByTitle() {
         Mono<Video> justResult = Mono.just(new Video());
-        when(videoRepository.findByTitle(Mockito.any())).thenReturn(justResult);
+        when(videoRepository.findByTitleIgnoreCaseContaining(Mockito.any())).thenReturn(justResult);
         videoServiceImpl.getVideoByTitle("Dr");
-        verify(videoRepository).findByTitle(Mockito.any());
+        verify(videoRepository).findByTitleIgnoreCaseContaining(Mockito.any());
     }
 
     /**

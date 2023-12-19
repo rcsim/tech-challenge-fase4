@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@Document(collation = "videos")
+@Document(collection  = "videos")
 public class Video {
 
     @Id
