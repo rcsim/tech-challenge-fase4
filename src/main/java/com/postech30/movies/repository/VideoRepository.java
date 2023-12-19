@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public interface VideoRepository extends ReactiveMongoRepository<Video, String> {
 
-    Mono<Video> findByTitle(String title);
+    Mono<Video> findByTitleIgnoreCaseContaining(String title);
 
     Flux<Video> findByPublishDate(LocalDate publishDate);
 }

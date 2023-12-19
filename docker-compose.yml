@@ -18,8 +18,8 @@ services:
       - mongo
     build: .
     environment:
-      - spring.data.mongodb.uri=mongodb://4movies:yU1T55xcVR@mongo:27017/4movies
-      - SPRING_PROFILES_ACTIVE=dev
+      - spring.data.mongodb.uri=mongodb://4movies:yU1T55xcVR@mongo:27017/4movies?authSource=admin
+      - SPRING_PROFILES_ACTIVE=test
     ports:
       - "8080:8080"
 

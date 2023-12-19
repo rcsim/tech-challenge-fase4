@@ -69,9 +69,9 @@ class VideoControllerTest {
     void testGetVideoByTitle() {
         VideoRepository videoRepository = mock(VideoRepository.class);
         Mono<Video> justResult = Mono.just(new Video());
-        when(videoRepository.findByTitle(Mockito.any())).thenReturn(justResult);
+        when(videoRepository.findByTitleIgnoreCaseContaining(Mockito.any())).thenReturn(justResult);
         (new VideoController(new VideoServiceImpl(videoRepository))).getVideoByTitle("Dr");
-        verify(videoRepository).findByTitle(Mockito.any());
+        verify(videoRepository).findByTitleIgnoreCaseContaining(Mockito.any());
     }
 
     /**
