@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "45581765-418a-4e8b-aa77-a209173c63f4",
+		"name": "Videos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17475893"
+	},
+	"item": [
+		{
+			"name": "Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/videos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Video",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/videos/6589d94b866c274a83a3eefe",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos",
+						"6589d94b866c274a83a3eefe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A Video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Godfather Part II\",\r\n    \"description\": \"The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.\",\r\n    \"url\": \"https://www.imdb.com/title/tt0071562/?ref_=ext_shr_lnk\",\r\n    \"publishDate\": \"12-10-1974\",\r\n    \"views\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/videos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Udate a Video",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Godfather Part II\",\r\n    \"description\": \"The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.\",\r\n    \"url\": \"https://www.imdb.com/title/tt0071562/?ref_=ext_shr_lnk\",\r\n    \"publishDate\": \"12-10-1974\",\r\n    \"views\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/videos/6589f29c02d80a593cc9e80c",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos",
+						"6589f29c02d80a593cc9e80c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Video",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/videos/6589f47632782204dfc47fe8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos",
+						"6589f47632782204dfc47fe8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

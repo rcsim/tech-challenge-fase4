@@ -1,16 +1,16 @@
 db = db.getSiblingDB('4movies');
 
 db.createCollection("categories");
-db.createCollection("user");
+db.createCollection("users");
 db.createCollection("videos");
 
 // Insert data into the categories collection
 var category1 = db.categories.insertOne({ "name": "Action", "description": "Action movies involve instances of physical action such as fights, stunts, car chases, etc." }).insertedId;
 var category2 = db.categories.insertOne({ "name": "Comedy", "description": "Comedy movies are designed to elicit laughter." }).insertedId;
 
-// Insert data into the user collection
-var user1 = db.user.insertOne({ "name": "John Doe", "email": "johndoe@example.com", "favorites": [] }).insertedId;
-var user2 = db.user.insertOne({ "name": "Jane Doe", "email": "janedoe@example.com", "favorites": [] }).insertedId;
+// Insert data into the users collection
+var user1 = db.users.insertOne({ "name": "John Doe", "email": "johndoe@example.com", "favorites": [] }).insertedId;
+var user2 = db.users.insertOne({ "name": "Jane Doe", "email": "janedoe@example.com", "favorites": [] }).insertedId;
 
 // Insert data into the videos collection
 var video1 = db.videos.insertOne({
@@ -43,9 +43,9 @@ var video3 = db.videos.insertOne({
   "favoritedBy": [user1, user2]
 }).insertedId;
 
-// Update the user documents with the _id fields of the videos documents
-db.user.updateOne({ "_id": user1 }, { "$set": { "favorites": [video1, video3] } });
-db.user.updateOne({ "_id": user2 }, { "$set": { "favorites": [video2, video3] } });
+// Update the users documents with the _id fields of the videos documents
+db.users.updateOne({ "_id": user1 }, { "$set": { "favorites": [video1, video3] } });
+db.users.updateOne({ "_id": user2 }, { "$set": { "favorites": [video2, video3] } });
 
 // Update the videos documents with the _id fields of the user and categories documents
 db.videos.updateOne({ "_id": video1 }, { "$set": { "favoritedBy": [user1], "categories": [category1] } });
