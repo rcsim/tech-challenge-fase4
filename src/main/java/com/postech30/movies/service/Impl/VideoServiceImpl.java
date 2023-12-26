@@ -57,6 +57,7 @@ public class VideoServiceImpl implements VideoService {
             existingVideo.setTitle(videoDTO.getTitle());
             existingVideo.setUrl(videoDTO.getUrl());
             existingVideo.setPublishDate(videoDTO.getPublishDate());
+            existingVideo.setViews(videoDTO.getViews());
             return videoRepository.save(existingVideo);
         }).map(VideoMapper::mapToVideoDTO);
     }

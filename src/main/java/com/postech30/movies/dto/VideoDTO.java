@@ -34,4 +34,6 @@ public class VideoDTO {
     @NotNull(message = "A data de publicação é um campo de preenchimento obrigatório")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate publishDate;
+
+    private Long views;
 }

@@ -7,21 +7,15 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Document(collection  = "videos")
-public class Video {
+@Document(collection  = "users")
+public class User {
 
     @Id
     private String id;
-    private String title;
-    private String description;
-    private String url;
-    private LocalDate publishDate;
-    private Long views;
-
+    private String name;
+    private String email;
 }
