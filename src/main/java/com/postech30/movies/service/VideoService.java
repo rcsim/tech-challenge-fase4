@@ -1,5 +1,6 @@
 package com.postech30.movies.service;
 
+import com.postech30.movies.dto.CategoryDTO;
 import com.postech30.movies.dto.VideoDTO;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,6 +16,8 @@ public interface VideoService {
     Mono<VideoDTO> getVideoByTitle(String title);
 
     Flux<VideoDTO> getVideoByPublishDate(LocalDate publishDate);
+
+    Flux<VideoDTO> getVideoByCategory(String categoryName);
 
     Mono<VideoDTO> saveVideo(VideoDTO videoDTO);
 

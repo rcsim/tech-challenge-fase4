@@ -1,5 +1,6 @@
 package com.postech30.movies.controller;
 
+import com.postech30.movies.dto.CategoryDTO;
 import com.postech30.movies.dto.VideoDTO;
 import com.postech30.movies.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -7,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping("api/videos")
 @AllArgsConstructor
+@Validated
 public class VideoController {
 
     private VideoService videoService;
@@ -58,6 +61,15 @@ public class VideoController {
         return videoService.getVideoByPublishDate(publishDate);
     }
 
+    @Operation(summary = "Busca de vídeo por categoria", description = "Busca o vídeo na base de dados do sistema.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Vídeos encontrados na base de dados do sistema."),
+            @ApiResponse(responseCode = "400", description = "Request incorreto"),
+            @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
+    @GetMapping(value = "category/{category}")
+    public Flux<VideoDTO> getVideoByCategory(@PathVariable("category") String category) {
+        return videoService.getVideoByCategory(category);
+    }
 
     @Operation(summary = "Salva um vídeo", description = "Salva um vídeo na base de dados do sistema.")
     @ApiResponses({
@@ -89,5 +101,4 @@ public class VideoController {
     public Mono<Void> deleteVideo(@PathVariable("id") String videoId) {
         return videoService.deleteVideo(videoId);
     }
-
 }

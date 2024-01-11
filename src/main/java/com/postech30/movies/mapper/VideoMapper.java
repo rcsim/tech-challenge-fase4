@@ -2,9 +2,12 @@ package com.postech30.movies.mapper;
 
 import com.postech30.movies.dto.VideoDTO;
 import com.postech30.movies.entity.Video;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VideoMapper {
 
+    private static final Logger logger = LoggerFactory.getLogger(VideoMapper.class);
     public static VideoDTO mapToVideoDTO(Video video) {
         return VideoDTO.builder()
                 .id(video.getId())
@@ -13,6 +16,9 @@ public class VideoMapper {
                 .url(video.getUrl())
                 .publishDate(video.getPublishDate())
                 .views(video.getViews())
+                .favoritedBy(video.getFavoritedBy())
+                .categoryName(video.getCategoryName())
+                .categoryDescription(video.getCategoryDescription())
                 .build();
     }
 
@@ -23,7 +29,10 @@ public class VideoMapper {
                 videoDTO.getDescription(),
                 videoDTO.getUrl(),
                 videoDTO.getPublishDate(),
-                videoDTO.getViews()
+                videoDTO.getViews(),
+                videoDTO.getFavoritedBy(),
+                videoDTO.getCategoryName(),
+                videoDTO.getCategoryDescription()
         );
     }
 }

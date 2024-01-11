@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +23,8 @@ public class Video {
     private String description;
     private String url;
     private LocalDate publishDate;
-    private Long views;
-
+    private Integer views;
+    private List<String> favoritedBy;
+    private String categoryName;
+    private String categoryDescription;
 }
