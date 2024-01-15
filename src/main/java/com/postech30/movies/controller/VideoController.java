@@ -7,9 +7,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -27,8 +30,10 @@ public class VideoController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Busca todos os Vídeos na base de dados do sistema. Retorna uma lista vazia caso não existam Vídeos cadastrados"),})
     @GetMapping
-    public Flux<VideoDTO> getAllVideos() {
-        return videoService.getAllVideos();
+    public Mono<Page<VideoDTO>> getAllVideos(Pageable pageable){
+        return videoService.getAllVideos(pageable)
+                .collectList()
+                .map(list -> new PageImpl<>(list, pageable, list.size()));
     }
 
     @Operation(summary = "Busca de vídeo por ID", description = "Busca o vídeo na base de dados do sistema.")

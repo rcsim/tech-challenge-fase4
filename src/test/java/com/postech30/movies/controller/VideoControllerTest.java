@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.http.MediaType;
@@ -41,7 +43,7 @@ class VideoControllerTest {
     private VideoService videoService;
 
     /**
-     * Method under test: {@link VideoController#getAllVideos()}
+     * Method under test: {@link VideoController#getAllVideos(Pageable)}
      */
     @Test
     void testGetAllVideos() {
@@ -50,11 +52,13 @@ class VideoControllerTest {
 
         Flux<Video> fromIterableResult = Flux.fromIterable(new ArrayList<>());
 
+        Pageable pageable = PageRequest.of(0, 10); // First page, 10 items per page
+
         when(reactiveMongoTemplate.aggregate(any(Aggregation.class), eq("videos"), eq(Video.class)))
                 .thenReturn(fromIterableResult);
 
         VideoController videoController = new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate));
-        videoController.getAllVideos();
+        videoController.getAllVideos(pageable);
 
         verify(reactiveMongoTemplate).aggregate(any(Aggregation.class), eq("videos"), eq(Video.class));
     }

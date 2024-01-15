@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.http.server.reactive.ChannelSendOperator;
@@ -39,7 +41,7 @@ class VideoServiceImplTest {
     private ReactiveMongoTemplate reactiveMongoTemplate;
 
     /**
-     * Method under test: {@link VideoServiceImpl#getAllVideos()}
+     * Method under test: {@link VideoServiceImpl#getAllVideos(Pageable)}
      */
     @Test
     void testGetAllVideos() {
@@ -51,11 +53,13 @@ class VideoServiceImplTest {
 
         Flux<Video> videoFlux = Flux.just(video);
 
+        Pageable pageable = PageRequest.of(0, 10); // First page, 10 items per page
+
         when(reactiveMongoTemplate.aggregate(any(Aggregation.class), eq("videos"), eq(Video.class)))
                 .thenReturn(videoFlux);
 
         // When
-        Flux<VideoDTO> result = videoServiceImpl.getAllVideos();
+        Flux<VideoDTO> result = videoServiceImpl.getAllVideos(pageable);
 
         // Then
         StepVerifier.create(result)

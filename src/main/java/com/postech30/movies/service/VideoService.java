@@ -2,6 +2,7 @@ package com.postech30.movies.service;
 
 import com.postech30.movies.dto.CategoryDTO;
 import com.postech30.movies.dto.VideoDTO;
+import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 
 public interface VideoService {
 
-    Flux<VideoDTO> getAllVideos();
+    Flux<VideoDTO> getAllVideos(Pageable pageable);
 
     Mono<VideoDTO> getVideo(String videoId);
 
