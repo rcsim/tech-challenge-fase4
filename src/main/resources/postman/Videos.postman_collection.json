@@ -26,6 +26,25 @@
 			"response": []
 		},
 		{
+			"name": "Get All Sorted",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/videos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get By Category Name",
 			"request": {
 				"method": "GET",

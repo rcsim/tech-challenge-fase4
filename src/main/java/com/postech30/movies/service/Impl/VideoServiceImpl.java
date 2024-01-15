@@ -9,15 +9,20 @@ import com.postech30.movies.service.VideoService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -28,19 +33,34 @@ public class VideoServiceImpl implements VideoService {
     private static final Logger logger = LoggerFactory.getLogger(VideoMapper.class);
 
     @Override
-    public Flux<VideoDTO> getAllVideos() {
+    public Flux<VideoDTO> getAllVideos(Pageable pageable) {
+        List<AggregationOperation> operations = new ArrayList<>();
+
+        operations.add(Aggregation.lookup("categories", "category", "_id", "categoryInfo"));
+        operations.add(Aggregation.unwind("categoryInfo"));
+        operations.add(Aggregation.project()
+                .andInclude("_id", "title", "description", "url", "publishDate", "views", "favoritedBy")
+                .and("categoryInfo.name").as("categoryName")
+                .and("categoryInfo.description").as("categoryDescription"));
+
+        // Add sorting operations from pageable
+        for (Sort.Order order : pageable.getSort()) {
+            operations.add(new SortOperation(Sort.by(order.getDirection(), order.getProperty())));
+        }
+
+        // Add default sorting operation by publishDate in descending order
+        //operations.add(Aggregation.sort(Sort.Direction.DESC, "publishDate"));
+
+        // Add paging operations
+        operations.add(Aggregation.skip((long) pageable.getPageNumber() * pageable.getPageSize()));
+        operations.add(Aggregation.limit(pageable.getPageSize()));
+
         Flux<Video> videoFlux = reactiveMongoTemplate.aggregate(
-                Aggregation.newAggregation(
-                        Aggregation.lookup("categories", "category", "_id", "categoryInfo"),
-                        Aggregation.unwind("categoryInfo"),
-                        Aggregation.project()
-                                .andInclude("_id", "title", "description", "url", "publishDate", "views", "favoritedBy")
-                                .and("categoryInfo.name").as("categoryName")
-                                .and("categoryInfo.description").as("categoryDescription")
-                ),
+                Aggregation.newAggregation(operations),
                 "videos",
                 Video.class
         );
+
         return videoFlux.map(VideoMapper::mapToVideoDTO).switchIfEmpty(Flux.empty());
     }
 
