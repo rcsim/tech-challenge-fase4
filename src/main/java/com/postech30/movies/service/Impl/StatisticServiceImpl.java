@@ -4,6 +4,7 @@ import com.postech30.movies.dto.StatisticDTO;
 import com.postech30.movies.repository.VideoRepository;
 import com.postech30.movies.service.StatisticService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 public class StatisticServiceImpl implements StatisticService {
 
     private VideoRepository videoRepository;
+    private final ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Override
     public Mono<StatisticDTO> getStatistics() {

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ChannelSendOperator;
 import org.springframework.test.context.ContextConfiguration;
@@ -44,10 +46,17 @@ class VideoControllerTest {
     @Test
     void testGetAllVideos() {
         VideoRepository videoRepository = mock(VideoRepository.class);
+        ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
+
         Flux<Video> fromIterableResult = Flux.fromIterable(new ArrayList<>());
-        when(videoRepository.findAll()).thenReturn(fromIterableResult);
-        (new VideoController(new VideoServiceImpl(videoRepository))).getAllVideos();
-        verify(videoRepository).findAll();
+
+        when(reactiveMongoTemplate.aggregate(any(Aggregation.class), eq("videos"), eq(Video.class)))
+                .thenReturn(fromIterableResult);
+
+        VideoController videoController = new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate));
+        videoController.getAllVideos();
+
+        verify(reactiveMongoTemplate).aggregate(any(Aggregation.class), eq("videos"), eq(Video.class));
     }
 
     /**
@@ -56,9 +65,10 @@ class VideoControllerTest {
     @Test
     void testGetVideo() {
         VideoRepository videoRepository = mock(VideoRepository.class);
+        ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
         Mono<Video> justResult = Mono.just(new Video());
         when(videoRepository.findById(Mockito.<String>any())).thenReturn(justResult);
-        (new VideoController(new VideoServiceImpl(videoRepository))).getVideo("42");
+        (new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate))).getVideo("42");
         verify(videoRepository).findById(Mockito.<String>any());
     }
 
@@ -68,9 +78,10 @@ class VideoControllerTest {
     @Test
     void testGetVideoByTitle() {
         VideoRepository videoRepository = mock(VideoRepository.class);
+        ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
         Mono<Video> justResult = Mono.just(new Video());
         when(videoRepository.findByTitleIgnoreCaseContaining(Mockito.any())).thenReturn(justResult);
-        (new VideoController(new VideoServiceImpl(videoRepository))).getVideoByTitle("Dr");
+        (new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate))).getVideoByTitle("Dr");
         verify(videoRepository).findByTitleIgnoreCaseContaining(Mockito.any());
     }
 
@@ -80,9 +91,10 @@ class VideoControllerTest {
     @Test
     void testGetVideoByPublishDate() {
         VideoRepository videoRepository = mock(VideoRepository.class);
+        ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
         Flux<Video> fromIterableResult = Flux.fromIterable(new ArrayList<>());
         when(videoRepository.findByPublishDate(Mockito.any())).thenReturn(fromIterableResult);
-        VideoController videoController = new VideoController(new VideoServiceImpl(videoRepository));
+        VideoController videoController = new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate));
         videoController.getVideoByPublishDate(LocalDate.of(1970, 1, 1));
         verify(videoRepository).findByPublishDate(Mockito.any());
     }
@@ -93,9 +105,10 @@ class VideoControllerTest {
     @Test
     void testSaveVideo() {
         VideoRepository videoRepository = mock(VideoRepository.class);
+        ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
         Mono<Video> justResult = Mono.just(new Video());
         when(videoRepository.save(Mockito.any())).thenReturn(justResult);
-        VideoController videoController = new VideoController(new VideoServiceImpl(videoRepository));
+        VideoController videoController = new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate));
         videoController.saveVideo(new VideoDTO());
         verify(videoRepository).save(Mockito.any());
     }
@@ -137,11 +150,12 @@ class VideoControllerTest {
     @Test
     void testDeleteVideo() {
         VideoRepository videoRepository = mock(VideoRepository.class);
+        ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
         Flux<?> source = Flux.fromIterable(new ArrayList<>());
         ChannelSendOperator<Object> channelSendOperator = new ChannelSendOperator<>(source, mock(Function.class));
 
         when(videoRepository.deleteById(Mockito.<String>any())).thenReturn(channelSendOperator);
-        Mono<Void> actualDeleteVideoResult = (new VideoController(new VideoServiceImpl(videoRepository))).deleteVideo("42");
+        Mono<Void> actualDeleteVideoResult = (new VideoController(new VideoServiceImpl(videoRepository, reactiveMongoTemplate))).deleteVideo("42");
         verify(videoRepository).deleteById(Mockito.<String>any());
         assertSame(channelSendOperator, actualDeleteVideoResult);
     }

@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,5 +36,16 @@ public class VideoDTO {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate publishDate;
 
-    private Long views;
+    @JsonProperty
+    private Integer views;
+
+    @JsonProperty
+    private List<String> favoritedBy;
+
+    @JsonProperty
+    private String categoryName;
+
+    @JsonProperty
+    private String categoryDescription;
+
 }
