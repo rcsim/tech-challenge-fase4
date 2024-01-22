@@ -6,6 +6,7 @@ import com.postech30.movies.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -42,7 +43,7 @@ public class VideoController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "{id}")
-    public Mono<VideoDTO> getVideo(@PathVariable("id") String videoId) {
+    public Mono<VideoDTO> getVideo(@Valid @PathVariable("id") String videoId) {
         return videoService.getVideo(videoId);
     }
 
@@ -52,7 +53,7 @@ public class VideoController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "title/{title}")
-    public Mono<VideoDTO> getVideoByTitle(@PathVariable("title") String title) {
+    public Mono<VideoDTO> getVideoByTitle(@Valid @PathVariable("title") String title) {
         return videoService.getVideoByTitle(title);
     }
 
@@ -62,7 +63,7 @@ public class VideoController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "publishDate/{publishDate}")
-    public Flux<VideoDTO> getVideoByPublishDate(@PathVariable("publishDate") LocalDate publishDate) {
+    public Flux<VideoDTO> getVideoByPublishDate(@Valid @PathVariable("publishDate") LocalDate publishDate) {
         return videoService.getVideoByPublishDate(publishDate);
     }
 
@@ -72,7 +73,7 @@ public class VideoController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "category/{category}")
-    public Flux<VideoDTO> getVideoByCategory(@PathVariable("category") String category) {
+    public Flux<VideoDTO> getVideoByCategory(@Valid @PathVariable("category") String category) {
         return videoService.getVideoByCategory(category);
     }
 
@@ -83,7 +84,7 @@ public class VideoController {
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Mono<VideoDTO> saveVideo(@RequestBody VideoDTO videoDTO) {
+    public Mono<VideoDTO> saveVideo(@Valid @RequestBody VideoDTO videoDTO) {
         return videoService.saveVideo(videoDTO);
     }
 
@@ -93,7 +94,7 @@ public class VideoController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PutMapping(value = "{id}")
-    public Mono<VideoDTO> updateVideo(@RequestBody VideoDTO videoDTO, @PathVariable("id") String videoId) {
+    public Mono<VideoDTO> updateVideo(@Valid @RequestBody VideoDTO videoDTO,@Valid @PathVariable("id") String videoId) {
         return videoService.updateVideo(videoDTO, videoId);
     }
 
@@ -103,7 +104,7 @@ public class VideoController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @DeleteMapping(value = "{id}")
-    public Mono<Void> deleteVideo(@PathVariable("id") String videoId) {
+    public Mono<Void> deleteVideo(@Valid @PathVariable("id") String videoId) {
         return videoService.deleteVideo(videoId);
     }
 }

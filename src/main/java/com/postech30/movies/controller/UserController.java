@@ -5,6 +5,7 @@ import com.postech30.movies.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -35,7 +36,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "{id}")
-    public Mono<UserDTO> getUser(@PathVariable("id") String userId) {
+    public Mono<UserDTO> getUser(@Valid @PathVariable("id") String userId) {
         return userService.getUser(userId);
     }
 
@@ -46,7 +47,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PostMapping
-    public Mono<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
+    public Mono<UserDTO> saveUser(@Valid @RequestBody UserDTO userDTO) {
         return userService.saveUser(userDTO);
     }
 
@@ -58,7 +59,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PutMapping("{id}")
-    public Mono<UserDTO> updateUser(@RequestBody UserDTO userDTO, @PathVariable("id") String userId) {
+    public Mono<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO,@Valid @PathVariable("id") String userId) {
         return userService.updateUser( userDTO, userId);
     }
 
@@ -71,7 +72,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @DeleteMapping("{id}")
-    public Mono<Void> deleteUser(@PathVariable("id") String userId) {
+    public Mono<Void> deleteUser(@Valid @PathVariable("id") String userId) {
         return userService.deleteUser(userId);
     }
 }

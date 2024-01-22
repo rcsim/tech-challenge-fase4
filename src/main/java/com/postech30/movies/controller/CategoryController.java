@@ -5,6 +5,7 @@ import com.postech30.movies.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -34,7 +35,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "{id}")
-    public Mono<CategoryDTO> getCategory(@PathVariable("id") String categoryId) {
+    public Mono<CategoryDTO> getCategory(@Valid @PathVariable("id") String categoryId) {
         return categoryService.getCategory(categoryId);
     }
 
@@ -44,7 +45,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PostMapping
-    public Mono<CategoryDTO> saveCategory(@RequestBody CategoryDTO categoryDTO) {
+    public Mono<CategoryDTO> saveCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
         return categoryService.saveCategory(categoryDTO);
     }
 
@@ -55,7 +56,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "404", description = "Categoria não encontrada"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PutMapping("{id}")
-    public Mono<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable("id") String categoryId) {
+    public Mono<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO, @PathVariable("id") String categoryId) {
         return categoryService.updateCategory(categoryDTO, categoryId);
     }
 
@@ -66,7 +67,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "404", description = "Categoria não encontrada"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @DeleteMapping("{id}")
-    public Mono<Void> deleteCategory(@PathVariable("id") String categoryId) {
+    public Mono<Void> deleteCategory(@Valid @PathVariable("id") String categoryId) {
         return categoryService.deleteCategory(categoryId);
     }
 }
