@@ -1,6 +1,5 @@
 package com.postech30.movies.repository;
 
-import com.postech30.movies.dto.CategoryDTO;
 import com.postech30.movies.entity.Video;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.Query;
