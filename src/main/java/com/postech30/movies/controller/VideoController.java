@@ -2,11 +2,15 @@ package com.postech30.movies.controller;
 
 import com.postech30.movies.dto.CategoryDTO;
 import com.postech30.movies.dto.VideoDTO;
+import com.postech30.movies.service.AwsService;
 import com.postech30.movies.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
@@ -16,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @RestController
@@ -106,4 +111,12 @@ public class VideoController {
     public Mono<Void> deleteVideo(@PathVariable("id") String videoId) {
         return videoService.deleteVideo(videoId);
     }
+
+
+    @GetMapping(value = "video/{id}", produces = "video/mp4")
+    public Mono<Resource> streamVideo(@PathVariable("id") String id) throws IOException {
+
+       return videoService.stream(id);
+    }
+
 }

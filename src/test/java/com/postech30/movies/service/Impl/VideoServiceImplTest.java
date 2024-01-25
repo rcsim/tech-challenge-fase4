@@ -4,8 +4,10 @@ import com.postech30.movies.dto.VideoDTO;
 import com.postech30.movies.entity.Category;
 import com.postech30.movies.entity.Video;
 import com.postech30.movies.repository.VideoRepository;
+import com.postech30.movies.service.AwsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,6 +38,10 @@ class VideoServiceImplTest {
 
     @Autowired
     private VideoServiceImpl videoServiceImpl;
+
+    @Autowired
+    private AwsServiceImpl awsService;
+
 
     @MockBean
     private ReactiveMongoTemplate reactiveMongoTemplate;
