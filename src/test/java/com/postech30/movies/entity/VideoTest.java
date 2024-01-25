@@ -1,11 +1,13 @@
 package com.postech30.movies.entity;
 
 import com.postech30.movies.dto.CategoryDTO;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -49,7 +51,10 @@ class VideoTest {
         actualVideo.setCategoryName("Category Name");
         actualVideo.setCategoryDescription("Category Description");
         List<String> favoritedBy = Arrays.asList("User1", "User2");
-        actualVideo.setFavoritedBy(favoritedBy);
+        List<ObjectId> favoritedByObjectIds = favoritedBy.stream()
+                .map(userId -> new ObjectId())
+                .collect(Collectors.toList());
+        actualVideo.setFavoritedBy(favoritedByObjectIds);
 
         String actualDescription = actualVideo.getDescription();
         String actualId = actualVideo.getId();
@@ -58,7 +63,7 @@ class VideoTest {
         Integer actualViews = actualVideo.getViews();
         String actualCategoryName = actualVideo.getCategoryName();
         String actualCategoryDescription = actualVideo.getCategoryDescription();
-        List<String> actualFavoritedBy = actualVideo.getFavoritedBy();
+        List<ObjectId> actualFavoritedBy = actualVideo.getFavoritedBy();
 
         assertEquals("42", actualId);
         assertEquals("Dr", actualTitle);
@@ -67,7 +72,7 @@ class VideoTest {
         assertEquals(Integer.valueOf(100), actualViews);
         assertEquals("Category Name", actualCategoryName);
         assertEquals("Category Description", actualCategoryDescription);
-        assertEquals(favoritedBy, actualFavoritedBy);
+        assertEquals(favoritedByObjectIds, actualFavoritedBy);
         assertSame(publishDate, actualPublishDate);
     }
     /**
@@ -108,7 +113,10 @@ class VideoTest {
         actualVideo.setCategoryName("Action");
         actualVideo.setCategoryDescription("Action movies involve instances of physical action such as fights, stunts, car chases, etc.");
         List<String> favoritedBy = Arrays.asList("User1", "User2");
-        actualVideo.setFavoritedBy(favoritedBy);
+        List<ObjectId> favoritedByObjectIds = favoritedBy.stream()
+                .map(userId -> new ObjectId())
+                .collect(Collectors.toList());
+        actualVideo.setFavoritedBy(favoritedByObjectIds);
 
         String actualDescription = actualVideo.getDescription();
         String actualId = actualVideo.getId();
@@ -117,7 +125,7 @@ class VideoTest {
         Integer actualViews = actualVideo.getViews();
         String actualCategoryName = actualVideo.getCategoryName();
         String actualCategoryDescription = actualVideo.getCategoryDescription();
-        List<String> actualFavoritedBy = actualVideo.getFavoritedBy();
+        List<ObjectId> actualFavoritedBy = actualVideo.getFavoritedBy();
 
         assertEquals("42", actualId);
         assertEquals("Dr", actualTitle);
@@ -126,7 +134,7 @@ class VideoTest {
         assertEquals(Integer.valueOf(100), actualViews);
         assertEquals("Action", actualCategoryName);
         assertEquals("Action movies involve instances of physical action such as fights, stunts, car chases, etc.", actualCategoryDescription);
-        assertEquals(favoritedBy, actualFavoritedBy);
+        assertEquals(favoritedByObjectIds, actualFavoritedBy);
         assertSame(publishDate, actualPublishDate);
     }
 }

@@ -1,24 +1,21 @@
 package com.postech30.movies.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class FavoriteVideoDTO {
 
-    @Id
-    private  String id;
-
     @JsonProperty
+    @NotNull(message = "O name é um campo de preenchimento obrigatório")
     private String userId;
 
     @JsonProperty
+    @NotNull(message = "O name é um campo de preenchimento obrigatório")
     private  String videoId;
 }

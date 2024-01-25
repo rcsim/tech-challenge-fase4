@@ -59,7 +59,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/users/6589fbb24ac9e968138a83f9",
+					"raw": "localhost:8080/api/users/65b2c7cb4401495c72aabcc1",
 					"host": [
 						"localhost"
 					],
@@ -67,7 +67,7 @@
 					"path": [
 						"api",
 						"users",
-						"6589fbb24ac9e968138a83f9"
+						"65b2c7cb4401495c72aabcc1"
 					]
 				}
 			},

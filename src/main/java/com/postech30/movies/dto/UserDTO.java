@@ -2,9 +2,10 @@ package com.postech30.movies.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
-
 import lombok.*;
 import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,4 +23,6 @@ public class UserDTO {
     @JsonProperty
     @NotNull(message = "O email é um campo de preenchimento obrigatório")
     private String email;
+
+    private List<String> favorites;
 }

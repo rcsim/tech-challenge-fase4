@@ -3,7 +3,6 @@ db = db.getSiblingDB('4movies');
 db.createCollection("categories");
 db.createCollection("users");
 db.createCollection("videos");
-db.createCollection("favorite-videos");
 
 // Insert data into the categories collection
 var category1 = db.categories.insertOne({ "name": "Action", "description": "Action movies involve instances of physical action such as fights, stunts, car chases, etc." }).insertedId;

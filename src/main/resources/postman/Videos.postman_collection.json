@@ -12,7 +12,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/videos",
+					"raw": "http://localhost:8080/api/videos?page=0&size=10",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -20,6 +21,16 @@
 					"path": [
 						"api",
 						"videos"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
 					]
 				}
 			},
@@ -31,7 +42,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/videos",
+					"raw": "http://localhost:8080/api/videos?page=0&size=3&sort=publishDate,desc",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -39,6 +51,20 @@
 					"path": [
 						"api",
 						"videos"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						},
+						{
+							"key": "sort",
+							"value": "publishDate,desc"
+						}
 					]
 				}
 			},
@@ -50,14 +76,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/videos",
+					"raw": "localhost:8080/api/videos/category/Action",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
-						"videos"
+						"videos",
+						"category",
+						"Action"
 					]
 				}
 			},
@@ -81,7 +109,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/videos/6589d94b866c274a83a3eefe",
+					"raw": "localhost:8080/api/videos/65a489ac8b297a91518fa75b",
 					"host": [
 						"localhost"
 					],
@@ -89,7 +117,7 @@
 					"path": [
 						"api",
 						"videos",
-						"6589d94b866c274a83a3eefe"
+						"65a489ac8b297a91518fa75b"
 					]
 				}
 			},
@@ -102,7 +130,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"The Godfather Part II\",\r\n    \"description\": \"The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.\",\r\n    \"url\": \"https://www.imdb.com/title/tt0071562/?ref_=ext_shr_lnk\",\r\n    \"publishDate\": \"12-10-1974\",\r\n    \"views\": 1000\r\n}",
+					"raw": "{\r\n    \"description\": \"The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.\",\r\n    \"url\": \"https://www.imdb.com/title/tt0071562/?ref_=ext_shr_lnk\",\r\n    \"publishDate\": \"12-10-1974\",\r\n    \"views\": 1000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -147,6 +175,66 @@
 						"api",
 						"videos",
 						"6589f29c02d80a593cc9e80c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Favorite a Video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"65b2c7cb4401495c72aabcc1\",\r\n    \"videoId\": \"65a489ac8b297a91518fa75b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/videos/favorite/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos",
+						"favorite",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unfavorite a Video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"65b2c7cb4401495c72aabcc1\",\r\n    \"videoId\": \"65a489ac8b297a91518fa75b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/videos/unfavorite/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"videos",
+						"unfavorite",
+						""
 					]
 				}
 			},

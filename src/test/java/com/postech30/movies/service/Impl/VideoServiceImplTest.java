@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.postech30.movies.dto.VideoDTO;
 import com.postech30.movies.entity.Category;
 import com.postech30.movies.entity.Video;
+import com.postech30.movies.repository.UserRepository;
 import com.postech30.movies.repository.VideoRepository;
 import com.postech30.movies.service.AwsService;
 import org.junit.jupiter.api.Test;
@@ -38,11 +39,11 @@ class VideoServiceImplTest {
     @MockBean
     private VideoRepository videoRepository;
 
+    @MockBean
+    private UserRepository userRepository;
+
     @Autowired
     private VideoServiceImpl videoServiceImpl;
-
-    @Mock
-    private AmazonS3 amazonS3Client;
 
     @MockBean
     private ReactiveMongoTemplate reactiveMongoTemplate;

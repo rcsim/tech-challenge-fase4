@@ -1,26 +1,21 @@
 package com.postech30.movies.controller;
 
-import com.postech30.movies.dto.CategoryDTO;
+import com.postech30.movies.dto.FavoriteVideoDTO;
 import com.postech30.movies.dto.VideoDTO;
-import com.postech30.movies.service.AwsService;
 import com.postech30.movies.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 @RestController
@@ -112,7 +107,23 @@ public class VideoController {
         return videoService.deleteVideo(videoId);
     }
 
+    @Operation(summary = "Favorita um vídeo", description = "Favorita um vídeo na base de dados do sistema.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Vídeo favoritado com sucesso."),
+            @ApiResponse(responseCode = "400", description = "Request incorreto"),
+            @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
+    @PostMapping(value = "favorite/")
+    public Mono<VideoDTO> favoriteVideo(@RequestBody FavoriteVideoDTO favoriteVideoDTO) {
+        return videoService.favoriteVideo(favoriteVideoDTO);
+    }
 
-
-
+    @Operation(summary = "Remove favorita um vídeo", description = "Remove Favorita um vídeo na base de dados do sistema.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Vídeo removido dos favoritado com sucesso."),
+            @ApiResponse(responseCode = "400", description = "Request incorreto"),
+            @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
+    @PostMapping(value = "unfavorite/")
+    public Mono<VideoDTO> unfavoriteVideo(@RequestBody FavoriteVideoDTO favoriteVideoDTO) {
+        return videoService.unfavoriteVideo(favoriteVideoDTO);
+    }
 }
