@@ -28,5 +28,5 @@ public interface VideoService {
 
     Mono<Void> deleteVideo(String videoId);
 
-    Mono<Resource> stream(String id) throws IOException;
+
 }

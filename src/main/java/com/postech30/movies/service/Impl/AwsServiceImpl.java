@@ -18,7 +18,6 @@ import java.io.IOException;
 @Service
 public class AwsServiceImpl implements AwsService {
 
-
     AmazonS3 amazonS3Client;
 
     @Autowired
@@ -34,8 +33,6 @@ public class AwsServiceImpl implements AwsService {
         S3Object s3object = amazonS3Client.getObject(BUKET_NAME, "video"+id+".mp4");
         S3ObjectInputStream inputStream = s3object.getObjectContent();
         FileUtils.copyInputStreamToFile(inputStream, new File(PathUtil.getVideoPath()));
-
-
     }
 
 }

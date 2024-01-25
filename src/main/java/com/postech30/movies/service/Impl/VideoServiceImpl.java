@@ -41,11 +41,8 @@ public class VideoServiceImpl implements VideoService {
     private final ReactiveMongoTemplate reactiveMongoTemplate;
     private static final Logger logger = LoggerFactory.getLogger(VideoMapper.class);
 
-    @Autowired
-    private ResourceLoader resourceLoader;
 
-    @Autowired
-   private AwsService awsService;
+
 
     @Override
     public Flux<VideoDTO> getAllVideos(Pageable pageable) {
@@ -140,10 +137,5 @@ public class VideoServiceImpl implements VideoService {
         return videoRepository.deleteById(videoId);
     }
 
-    @Override
-    public Mono<Resource> stream(String id) throws IOException {
-          awsService.getVideoById(id);
 
-        return Mono.fromSupplier(() -> resourceLoader.getResource("file:"+PathUtil.getVideoPath()));
-    }
 }

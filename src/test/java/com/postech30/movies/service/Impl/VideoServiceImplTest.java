@@ -1,5 +1,6 @@
 package com.postech30.movies.service.Impl;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.postech30.movies.dto.VideoDTO;
 import com.postech30.movies.entity.Category;
 import com.postech30.movies.entity.Video;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -39,12 +41,14 @@ class VideoServiceImplTest {
     @Autowired
     private VideoServiceImpl videoServiceImpl;
 
-    @Autowired
-    private AwsServiceImpl awsService;
-
+    @Mock
+    private AmazonS3 amazonS3Client;
 
     @MockBean
     private ReactiveMongoTemplate reactiveMongoTemplate;
+
+
+
 
     /**
      * Method under test: {@link VideoServiceImpl#getAllVideos(Pageable)}

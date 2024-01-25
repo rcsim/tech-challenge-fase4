@@ -113,10 +113,6 @@ public class VideoController {
     }
 
 
-    @GetMapping(value = "video/{id}", produces = "video/mp4")
-    public Mono<Resource> streamVideo(@PathVariable("id") String id) throws IOException {
 
-       return videoService.stream(id);
-    }
 
 }
