@@ -31,6 +31,7 @@ public class VideoMapper {
                 videoDTO.getPublishDate(),
                 videoDTO.getViews(),
                 videoDTO.getFavoritedBy(),
+                videoDTO.getCategory(),
                 videoDTO.getCategoryName(),
                 videoDTO.getCategoryDescription()
         );

@@ -43,6 +43,9 @@ public class VideoDTO {
     private List<String> favoritedBy;
 
     @JsonProperty
+    private String category;
+
+    @JsonProperty
     private String categoryName;
 
     @JsonProperty

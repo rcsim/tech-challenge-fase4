@@ -136,5 +136,5 @@ var video12 = db.videos.insertOne({
 }).insertedId;
 
 // Update the users documents with the _id fields of the videos documents
-db.users.updateOne({ "_id": user1 }, { "$set": { "favorites": [video1, video3, video4, video5, video7, video8, video9, video11] } });
-db.users.updateOne({ "_id": user2 }, { "$set": { "favorites": [video2, video3, video4, video6, video7, video10, video12] } });
+db.users.updateOne({ "_id": user1 }, { "$set": { "favorites": [video1] } });
+db.users.updateOne({ "_id": user2 }, { "$set": { "favorites": [video2] } });

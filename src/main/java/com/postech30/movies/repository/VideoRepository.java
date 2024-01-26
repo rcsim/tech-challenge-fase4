@@ -2,6 +2,8 @@ package com.postech30.movies.repository;
 
 import com.postech30.movies.dto.CategoryDTO;
 import com.postech30.movies.entity.Video;
+import org.bson.types.ObjectId;
+import org.reactivestreams.Publisher;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -9,14 +11,18 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface VideoRepository extends ReactiveMongoRepository<Video, String> {
 
     Mono<Video> findByTitleIgnoreCaseContaining(String title);
 
+
     Flux<Video> findByPublishDate(LocalDate publishDate);
 
+
     Flux<Video> findByCategoryName(String categoryName);
+
 
     @Aggregation("{ $count: 'totalVideos' }")
     Mono<Long> getTotalVideos();
@@ -28,4 +34,6 @@ public interface VideoRepository extends ReactiveMongoRepository<Video, String> 
     Mono<Double> getAverageViews();
 
 
+    @Query("{ 'category': ?0 }")
+    Flux<Video> findVideosByCategory(ObjectId category);
 }
