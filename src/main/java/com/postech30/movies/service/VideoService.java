@@ -1,6 +1,6 @@
 package com.postech30.movies.service;
 
-import com.postech30.movies.dto.CategoryDTO;
+import com.postech30.movies.dto.FavoriteVideoDTO;
 import com.postech30.movies.dto.VideoDTO;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;
@@ -25,4 +25,8 @@ public interface VideoService {
     Mono<VideoDTO> updateVideo(VideoDTO videoDTO, String videoId);
 
     Mono<Void> deleteVideo(String videoId);
+
+    Mono<VideoDTO> favoriteVideo(FavoriteVideoDTO favoriteVideoDTO);
+
+    Mono<VideoDTO> unfavoriteVideo(FavoriteVideoDTO favoriteVideoDTO);
 }

@@ -2,6 +2,7 @@ package com.postech30.movies.controller;
 
 import com.postech30.movies.entity.Video;
 import com.postech30.movies.service.UserService;
+import org.bson.types.ObjectId;
 import org.mockito.InjectMocks;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.when;
 @SpringBootTest
@@ -35,8 +37,8 @@ public class UserControllerTest {
                 "https://example.com",
                 LocalDate.now(),
                 1000,
-                Arrays.asList("user1", "user2"),
-                "65b30969b4f04b5b4cfe0ba0",
+                Arrays.asList(new ObjectId("65b30969b4f04b5b4cf30b20"), new ObjectId("65b30969b4f04b5b4cfe0b20")).toString(),
+                Collections.singletonList(new ObjectId("65b30969b4f04b5b4cfe0ba0")),
                 "Example Category Name",
                 "Example Category Description"
         );

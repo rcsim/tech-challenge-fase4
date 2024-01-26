@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,8 +25,8 @@ public class Video {
     private String url;
     private LocalDate publishDate;
     private Integer views;
-    private List<String> favoritedBy;
     private String category;
+    private List<ObjectId> favoritedBy;
     private String categoryName;
     private String categoryDescription;
 }

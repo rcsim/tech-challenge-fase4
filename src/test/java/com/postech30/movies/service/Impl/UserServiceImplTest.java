@@ -17,6 +17,7 @@ import reactor.test.StepVerifier;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -41,7 +42,7 @@ public class UserServiceImplTest {
     public void testGetRecommendedVideos() {
         // Configurar dados de exemplo
         String userId = "exampleUserId";
-        User user = new User("1","teste","a@a.com", Arrays.asList("12334"));
+        User user = new User("1","teste","a@a.com", Arrays.asList(new ObjectId("65b30969b4f04b5b4cfe0b20")));
         Video video1 = new Video(
                 "12334",
                 "Example Title",
@@ -49,8 +50,8 @@ public class UserServiceImplTest {
                 "https://example.com",
                 LocalDate.now(),
                 1000,
-                Arrays.asList("user1", "user2"),
-                "65b30969b4f04b5b4cfe0ba0",
+                Arrays.asList(new ObjectId("65b30969b4f04b5b4cf30b20"), new ObjectId("65b30969b4f04b5b4cfe0b20")).toString(),
+                Collections.singletonList(new ObjectId("65b30969b4f04b5b4cfe0ba0")),
                 "Example Category Name",
                 "Example Category Description"
         );
