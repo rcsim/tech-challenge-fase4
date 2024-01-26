@@ -80,10 +80,10 @@ public class UserController {
     @Operation(summary = "Recomenda video a o usuario",
             description = "Recomenda video com base nos favoritos do usuario com base nos dados do sistema.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso."),
+            @ApiResponse(responseCode = "200", description = "Sucesso"),
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
-            @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+            })
     @GetMapping("/recommendation/{userId}")
     public Flux<Video> getRecommendations(@PathVariable String userId) {
 
