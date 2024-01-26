@@ -1,6 +1,7 @@
 package com.postech30.movies.controller;
 
 import com.postech30.movies.dto.UserDTO;
+import com.postech30.movies.entity.Video;
 import com.postech30.movies.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -74,4 +75,20 @@ public class UserController {
     public Mono<Void> deleteUser(@PathVariable("id") String userId) {
         return userService.deleteUser(userId);
     }
+
+
+    @Operation(summary = "Recomenda video a o usuario",
+            description = "Recomenda video com base nos favoritos do usuario com base nos dados do sistema.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Sucesso"),
+            @ApiResponse(responseCode = "400", description = "Request incorreto"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+            })
+    @GetMapping("/recommendation/{userId}")
+    public Flux<Video> getRecommendations(@PathVariable String userId) {
+
+        return userService.getRecommendedVideos(userId);
+
+    }
+
 }

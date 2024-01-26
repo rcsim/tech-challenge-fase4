@@ -34,6 +34,7 @@ public class VideoMapper {
                 videoDTO.getUrl(),
                 videoDTO.getPublishDate(),
                 videoDTO.getViews(),
+                videoDTO.getCategory(),
                 videoDTO.getFavoritedBy() != null ?
                         videoDTO.getFavoritedBy().stream()
                                 .map(ObjectId::new)

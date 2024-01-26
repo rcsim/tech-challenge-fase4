@@ -1,14 +1,22 @@
 package com.postech30.movies.service.Impl;
 
 import com.postech30.movies.dto.UserDTO;
+import com.postech30.movies.dto.VideoDTO;
 import com.postech30.movies.entity.User;
+import com.postech30.movies.entity.Video;
 import com.postech30.movies.mapper.UserMapper;
+import com.postech30.movies.mapper.VideoMapper;
 import com.postech30.movies.repository.UserRepository;
+import com.postech30.movies.repository.VideoRepository;
 import com.postech30.movies.service.UserService;
 import lombok.AllArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -16,6 +24,10 @@ import reactor.core.publisher.Mono;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+
+    private VideoRepository videoRepository;
+
+
 
     @Override
     public Flux<UserDTO> getAllUsers() {
@@ -48,5 +60,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Mono<Void> deleteUser(String userId) {
         return userRepository.deleteById(userId);
+    }
+
+    @Override
+    public Flux<Video> getRecommendedVideos(String userId) {
+        return userRepository.findById(userId)
+                .flatMapMany(user -> Flux.fromIterable(user.getFavorites())
+                        .flatMap(videoId -> videoRepository.findById(videoId.toString()))
+                        .flatMap(video ->  videoRepository.findVideosByCategory(new ObjectId(video.getCategory()))));
     }
 }
