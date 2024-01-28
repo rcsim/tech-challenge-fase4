@@ -21,8 +21,7 @@ public class VideoMapper {
                         video.getFavoritedBy().stream()
                                 .map(ObjectId::toHexString)
                                 .collect(Collectors.toList()) : null)
-                .categoryName(video.getCategoryName())
-                .categoryDescription(video.getCategoryDescription())
+                .category(video.getCategory() != null ? video.getCategory().toHexString() : null)
                 .build();
     }
 
@@ -34,13 +33,11 @@ public class VideoMapper {
                 videoDTO.getUrl(),
                 videoDTO.getPublishDate(),
                 videoDTO.getViews(),
-                videoDTO.getCategory(),
                 videoDTO.getFavoritedBy() != null ?
                         videoDTO.getFavoritedBy().stream()
                                 .map(ObjectId::new)
                                 .collect(Collectors.toList()) : null,
-                videoDTO.getCategoryName(),
-                videoDTO.getCategoryDescription()
+                videoDTO.getCategory() != null ? new ObjectId(videoDTO.getCategory()) : null
         );
     }
 }

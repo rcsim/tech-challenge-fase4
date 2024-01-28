@@ -25,8 +25,6 @@ public class Video {
     private String url;
     private LocalDate publishDate;
     private Integer views;
-    private String category;
     private List<ObjectId> favoritedBy;
-    private String categoryName;
-    private String categoryDescription;
+    private ObjectId category;
 }

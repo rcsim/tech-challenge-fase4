@@ -60,9 +60,8 @@ public class UserServiceImplTest {
         User user = new User("1", "teste", "a@a.com", Arrays.asList(new ObjectId("65b30969b4f04b5b4cfe0b20")));
         Video video1 = new Video("12334", "Example Title", "Example Description", "https://example.com", LocalDate.now(),
                 1000,
-                Arrays.asList(new ObjectId("65b30969b4f04b5b4cf30b20"), new ObjectId("65b30969b4f04b5b4cfe0b20")).toString(),
-                Collections.singletonList(new ObjectId("65b30969b4f04b5b4cfe0ba0")), "Example Category Name",
-                "Example Category Description");
+                Arrays.asList(new ObjectId("65b30969b4f04b5b4cf30b20"), new ObjectId("65b30969b4f04b5b4cf30b20")),
+                new ObjectId("65b30969b4f04b5b4cf30b20"));
         when(userRepository.findById(userId)).thenReturn(Mono.just(user));
         when(videoRepository.findById("videoId1")).thenReturn(Mono.just(video1));
         when(videoRepository.findVideosByCategory(new ObjectId("65b30969b4f04b5b4cfe0ba0"))).thenReturn(Flux.just(video1));

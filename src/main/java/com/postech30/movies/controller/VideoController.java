@@ -73,7 +73,7 @@ public class VideoController {
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @GetMapping(value = "category/{category}")
     public Flux<VideoDTO> getVideoByCategory(@PathVariable("category") String category) {
-        return videoService.getVideoByCategory(category);
+        return videoService.getVideosByCategory(category);
     }
 
     @Operation(summary = "Salva um vídeo", description = "Salva um vídeo na base de dados do sistema.")

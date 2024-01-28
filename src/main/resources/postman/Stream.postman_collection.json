@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "b85db07e-0c7d-4287-a9e6-7b29a0226d85",
+		"name": "Stream",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17475893"
+	},
+	"item": [
+		{
+			"name": "Stream a Video",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stream/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stream",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -20,7 +20,7 @@ public interface VideoRepository extends ReactiveMongoRepository<Video, String> 
     Flux<Video> findByPublishDate(LocalDate publishDate);
 
 
-    Flux<Video> findByCategoryName(String categoryName);
+    Flux<Video> findByCategory(ObjectId category);
 
 
     @Aggregation("{ $count: 'totalVideos' }")

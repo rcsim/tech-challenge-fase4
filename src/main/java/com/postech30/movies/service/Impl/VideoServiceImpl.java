@@ -44,20 +44,10 @@ public class VideoServiceImpl implements VideoService {
     public Flux<VideoDTO> getAllVideos(Pageable pageable) {
         List<AggregationOperation> operations = new ArrayList<>();
 
-        operations.add(Aggregation.lookup("categories", "category", "_id", "categoryInfo"));
-        operations.add(Aggregation.unwind("categoryInfo"));
-        operations.add(Aggregation.project()
-                .andInclude("_id", "title", "description", "url", "publishDate", "views", "favoritedBy")
-                .and("categoryInfo.name").as("categoryName")
-                .and("categoryInfo.description").as("categoryDescription"));
-
         // Add sorting operations from pageable
         for (Sort.Order order : pageable.getSort()) {
             operations.add(new SortOperation(Sort.by(order.getDirection(), order.getProperty())));
         }
-
-        // Add default sorting operation by publishDate in descending order
-        operations.add(Aggregation.sort(Sort.Direction.DESC, "publishDate"));
 
         // Add paging operations
         operations.add(Aggregation.skip((long) pageable.getPageNumber() * pageable.getPageSize()));
@@ -69,7 +59,7 @@ public class VideoServiceImpl implements VideoService {
                 Video.class
         );
 
-        return videoFlux.map(VideoMapper::mapToVideoDTO).switchIfEmpty(Flux.empty());
+        return videoFlux.map(VideoMapper::mapToVideoDTO);
     }
 
     @Override
@@ -91,20 +81,8 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Flux<VideoDTO> getVideoByCategory(String categoryName) {
-        MatchOperation matchStage = Aggregation.match(new Criteria("categoryInfo.name").is(categoryName));
-
-        Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.lookup("categories", "category", "_id", "categoryInfo"),
-                Aggregation.unwind("categoryInfo"),
-                matchStage,
-                Aggregation.project()
-                        .andInclude("_id", "title", "description", "url", "publishDate", "views", "favoritedBy")
-                        .and("categoryInfo.name").as("categoryName")
-                        .and("categoryInfo.description").as("categoryDescription")
-        );
-
-        Flux<Video> videoMono = reactiveMongoTemplate.aggregate(aggregation, "videos", Video.class);
+    public Flux<VideoDTO> getVideosByCategory(String category) {
+        Flux<Video> videoMono = videoRepository.findByCategory(new ObjectId(category));
         return videoMono.map(VideoMapper::mapToVideoDTO);
     }
 

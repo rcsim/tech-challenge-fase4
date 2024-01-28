@@ -67,6 +67,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId)
                 .flatMapMany(user -> Flux.fromIterable(user.getFavorites())
                         .flatMap(videoId -> videoRepository.findById(videoId.toString()))
-                        .flatMap(video ->  videoRepository.findVideosByCategory(new ObjectId(video.getCategory()))));
+                        .flatMap(video ->  videoRepository.findVideosByCategory(video.getCategory())));
     }
 }

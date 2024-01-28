@@ -42,7 +42,7 @@ var video3 = db.videos.insertOne({
   "publishDate": "2010-07-16",
   "category": category1,
   "views": 150,
-  "favoritedBy": [user1, user2]
+  "favoritedBy": null
 }).insertedId;
 
 var video4 = db.videos.insertOne({
@@ -58,5 +58,5 @@ var video4 = db.videos.insertOne({
 
 
 // Update the users documents with the _id fields of the videos documents
-db.users.updateOne({ "_id": user1 }, { "$set": { "favorites": [video1] } });
-db.users.updateOne({ "_id": user2 }, { "$set": { "favorites": [video2] } });
+db.users.updateOne({ "_id": user1 }, { "$set": { "favorites": [video1, video4] } });
+db.users.updateOne({ "_id": user2 }, { "$set": { "favorites": [video2, video4] } });
