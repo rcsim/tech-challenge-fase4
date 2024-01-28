@@ -81,7 +81,9 @@ https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postm
 
 
 ## Streaming the Videos com Deploy AWS S3
-TODO2
+Para gerenciar vídeos de forma eficiente, utilizamos o Amazon S3 para armazenamento e o AWS Java SDK para facilitar a interação com o S3. Os vídeos são enviados e organizados em buckets no S3, aproveitando sua escalabilidade e durabilidade. O AWS Java SDK simplifica a integração, proporcionando uma maneira fácil e segura de baixar vídeos para transmissão. A combinação dessas tecnologias garante uma recuperação eficiente dos vídeos armazenados, permitindo uma experiência de transmissão suave e confiável. A segurança é mantida por meio de políticas de controle de acesso, garantindo a proteção dos vídeos armazenados no S3.
+
+![image](https://github.com/rcsim/tech-challenge-fase4/blob/feature/recomendacao/assets/bucketS3.png)
 
 
 

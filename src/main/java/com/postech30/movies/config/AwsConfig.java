@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 public class AwsConfig {
     public AWSCredentials credentials() {
         AWSCredentials credentials = new BasicAWSCredentials(
-                "AKIAYQMKBFZM3EPA6MHL",
-                "g+Fbz+xuUcrSq1lWxE0bx5FttCSdWIzKMZRXafo/"
+                "",
+                ""
         );
         return credentials;
     }
