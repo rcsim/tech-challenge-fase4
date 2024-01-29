@@ -31,7 +31,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/categories/6589d94b866c274a83a3eefa",
+					"raw": "localhost:8080/api/categories/65b56b440c75f588c2abf86a",
 					"host": [
 						"localhost"
 					],
@@ -39,7 +39,7 @@
 					"path": [
 						"api",
 						"categories",
-						"6589d94b866c274a83a3eefa"
+						"65b56b440c75f588c2abf86a"
 					]
 				}
 			},
@@ -60,7 +60,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/categories/6589fcc94ac9e968138a83fa",
+					"raw": "localhost:8080/api/categories/65b56b440c75f588c2abf86a",
 					"host": [
 						"localhost"
 					],
@@ -68,7 +68,7 @@
 					"path": [
 						"api",
 						"categories",
-						"6589fcc94ac9e968138a83fa"
+						"65b56b440c75f588c2abf86a"
 					]
 				}
 			},
@@ -81,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Action 2\",\r\n    \"description\": \"Action movies involve instances of physical action such as fights, stunts, car chases, etc.\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Romance\",\r\n    \"description\": \"Romance movies are centered around the theme of love and relationships.\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -103,12 +103,12 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "Delete A Category",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/categories/6589fcc94ac9e968138a83fa",
+					"raw": "localhost:8080/api/categories/65b6d7ca05c12f06ccc41b69",
 					"host": [
 						"localhost"
 					],
@@ -116,7 +116,7 @@
 					"path": [
 						"api",
 						"categories",
-						"6589fcc94ac9e968138a83fa"
+						"65b6d7ca05c12f06ccc41b69"
 					]
 				}
 			},

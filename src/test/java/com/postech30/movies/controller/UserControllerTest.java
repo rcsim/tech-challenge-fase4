@@ -153,10 +153,8 @@ public class UserControllerTest {
         // Configurar dados de exemplo
         String userId = "exampleUserId";
         Video video1 = new Video("12334", "Example Title", "Example Description", "https://example.com", LocalDate.now(),
-                1000,
-                Arrays.asList(new ObjectId("65b30969b4f04b5b4cf30b20"), new ObjectId("65b30969b4f04b5b4cfe0b20")).toString(),
-                Collections.singletonList(new ObjectId("65b30969b4f04b5b4cfe0ba0")), "Example Category Name",
-                "Example Category Description");
+                1000,     Arrays.asList(new ObjectId("65b30969b4f04b5b4cf30b20"), new ObjectId("65b30969b4f04b5b4cf30b20")),
+                new ObjectId("65b30969b4f04b5b4cf30b20"));
 
         when(userService.getRecommendedVideos(userId)).thenReturn(Flux.just(video1));
 

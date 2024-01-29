@@ -1,41 +1,29 @@
 package com.postech30.movies.service.Impl;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.postech30.movies.dto.FavoriteVideoDTO;
 import com.postech30.movies.dto.VideoDTO;
-import com.postech30.movies.entity.Category;
 import com.postech30.movies.entity.User;
 import com.postech30.movies.entity.Video;
 import com.postech30.movies.repository.UserRepository;
 import com.postech30.movies.repository.VideoRepository;
-import com.postech30.movies.service.AwsService;
-import org.junit.jupiter.api.Disabled;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.http.server.reactive.ChannelSendOperator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.DirectProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -141,9 +129,7 @@ class VideoServiceImplTest {
     when(videoRepository.save(Mockito.<Video>any())).thenReturn(justResult);
     VideoServiceImpl videoServiceImpl = new VideoServiceImpl(videoRepository, mock(UserRepository.class), null);
     VideoDTO.VideoDTOBuilder descriptionResult = VideoDTO.builder()
-            .category("Category")
-            .categoryDescription("Category Description")
-            .categoryName("Category Name")
+            .category("65b56b440c75f588c2abf86b")
             .description("The characteristics of someone or something");
     VideoDTO.VideoDTOBuilder idResult = descriptionResult.favoritedBy(new ArrayList<>()).id("42");
     VideoDTO videoDTO = idResult.publishDate(LocalDate.of(1970, 1, 1))
@@ -237,5 +223,4 @@ class VideoServiceImplTest {
     verify(userRepository).findById(Mockito.<String>any());
     verify(videoRepository).findById(Mockito.<String>any());
   }
-
 }

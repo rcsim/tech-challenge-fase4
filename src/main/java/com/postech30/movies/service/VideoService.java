@@ -18,7 +18,7 @@ public interface VideoService {
 
     Flux<VideoDTO> getVideoByPublishDate(LocalDate publishDate);
 
-    Flux<VideoDTO> getVideoByCategory(String categoryName);
+    Flux<VideoDTO> getVideosByCategory(String categoryName);
 
     Mono<VideoDTO> saveVideo(VideoDTO videoDTO);
 

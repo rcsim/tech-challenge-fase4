@@ -14,9 +14,7 @@ class VideoTest {
     @Test
     void testGettersAndSetters() {
         Video actualVideo = new Video();
-        actualVideo.setCategory("Category");
-        actualVideo.setCategoryDescription("Category Description");
-        actualVideo.setCategoryName("Category Name");
+        actualVideo.setCategory(new ObjectId("65b56b440c75f588c2abf86b"));
         actualVideo.setDescription("The characteristics of someone or something");
         ArrayList<ObjectId> favoritedBy = new ArrayList<>();
         actualVideo.setFavoritedBy(favoritedBy);
@@ -26,9 +24,7 @@ class VideoTest {
         actualVideo.setTitle("Dr");
         actualVideo.setUrl("https://example.org/example");
         actualVideo.setViews(1);
-        String actualCategory = actualVideo.getCategory();
-        String actualCategoryDescription = actualVideo.getCategoryDescription();
-        String actualCategoryName = actualVideo.getCategoryName();
+        ObjectId actualCategory = actualVideo.getCategory();
         String actualDescription = actualVideo.getDescription();
         List<ObjectId> actualFavoritedBy = actualVideo.getFavoritedBy();
         String actualId = actualVideo.getId();
@@ -36,9 +32,7 @@ class VideoTest {
         String actualTitle = actualVideo.getTitle();
         String actualUrl = actualVideo.getUrl();
         assertEquals("42", actualId);
-        assertEquals("Category Description", actualCategoryDescription);
-        assertEquals("Category Name", actualCategoryName);
-        assertEquals("Category", actualCategory);
+        assertEquals(new ObjectId("65b56b440c75f588c2abf86b"), actualCategory);
         assertEquals("Dr", actualTitle);
         assertEquals("The characteristics of someone or something", actualDescription);
         assertEquals("https://example.org/example", actualUrl);

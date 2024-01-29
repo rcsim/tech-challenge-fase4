@@ -45,10 +45,4 @@ public class VideoDTO {
     @JsonProperty
     private String category;
 
-    @JsonProperty
-    private String categoryName;
-
-    @JsonProperty
-    private String categoryDescription;
-
 }
