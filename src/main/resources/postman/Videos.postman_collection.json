@@ -8,6 +8,87 @@
 	"item": [
 		{
 			"name": "Get All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"content\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"items\": {\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"properties\": {\r",
+							"                        \"id\": {\"type\": \"string\"},\r",
+							"                        \"title\": {\"type\": \"string\"},\r",
+							"                        \"description\": {\"type\": \"string\"},\r",
+							"                        \"url\": {\"type\": \"string\"},\r",
+							"                        \"publishDate\": {\"type\": \"string\"},\r",
+							"                        \"views\": {\"type\": \"integer\"},\r",
+							"                        \"favoritedBy\": {\r",
+							"                            \"type\": [\"array\", \"null\"],\r",
+							"                            \"items\": {\"type\": \"string\"}\r",
+							"                        },\r",
+							"                        \"category\": {\"type\": \"string\"}\r",
+							"                    },\r",
+							"                    \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"                }\r",
+							"            },\r",
+							"            \"pageable\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"pageNumber\": {\"type\": \"integer\"},\r",
+							"                    \"pageSize\": {\"type\": \"integer\"},\r",
+							"                    \"sort\": {\r",
+							"                        \"type\": \"object\",\r",
+							"                        \"properties\": {\r",
+							"                            \"empty\": {\"type\": \"boolean\"},\r",
+							"                            \"unsorted\": {\"type\": \"boolean\"},\r",
+							"                            \"sorted\": {\"type\": \"boolean\"}\r",
+							"                        },\r",
+							"                        \"required\": [\"empty\", \"unsorted\", \"sorted\"]\r",
+							"                    },\r",
+							"                    \"offset\": {\"type\": \"integer\"},\r",
+							"                    \"paged\": {\"type\": \"boolean\"},\r",
+							"                    \"unpaged\": {\"type\": \"boolean\"}\r",
+							"                },\r",
+							"                \"required\": [\"pageNumber\", \"pageSize\", \"sort\", \"offset\", \"paged\", \"unpaged\"]\r",
+							"            },\r",
+							"            \"totalPages\": {\"type\": \"integer\"},\r",
+							"            \"totalElements\": {\"type\": \"integer\"},\r",
+							"            \"last\": {\"type\": \"boolean\"},\r",
+							"            \"size\": {\"type\": \"integer\"},\r",
+							"            \"number\": {\"type\": \"integer\"},\r",
+							"            \"sort\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"empty\": {\"type\": \"boolean\"},\r",
+							"                    \"unsorted\": {\"type\": \"boolean\"},\r",
+							"                    \"sorted\": {\"type\": \"boolean\"}\r",
+							"                },\r",
+							"                \"required\": [\"empty\", \"unsorted\", \"sorted\"]\r",
+							"            },\r",
+							"            \"numberOfElements\": {\"type\": \"integer\"},\r",
+							"            \"first\": {\"type\": \"boolean\"},\r",
+							"            \"empty\": {\"type\": \"boolean\"}\r",
+							"        },\r",
+							"        \"required\": [\"content\", \"pageable\", \"totalPages\", \"totalElements\", \"last\", \"size\", \"number\", \"sort\", \"numberOfElements\", \"first\", \"empty\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -38,6 +119,87 @@
 		},
 		{
 			"name": "Get All Sorted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"content\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"items\": {\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"properties\": {\r",
+							"                        \"id\": {\"type\": \"string\"},\r",
+							"                        \"title\": {\"type\": \"string\"},\r",
+							"                        \"description\": {\"type\": \"string\"},\r",
+							"                        \"url\": {\"type\": \"string\"},\r",
+							"                        \"publishDate\": {\"type\": \"string\"},\r",
+							"                        \"views\": {\"type\": \"integer\"},\r",
+							"                        \"favoritedBy\": {\r",
+							"                            \"type\": [\"array\", \"null\"],\r",
+							"                            \"items\": {\"type\": \"string\"}\r",
+							"                        },\r",
+							"                        \"category\": {\"type\": \"string\"}\r",
+							"                    },\r",
+							"                    \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"                }\r",
+							"            },\r",
+							"            \"pageable\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"pageNumber\": {\"type\": \"integer\"},\r",
+							"                    \"pageSize\": {\"type\": \"integer\"},\r",
+							"                    \"sort\": {\r",
+							"                        \"type\": \"object\",\r",
+							"                        \"properties\": {\r",
+							"                            \"empty\": {\"type\": \"boolean\"},\r",
+							"                            \"unsorted\": {\"type\": \"boolean\"},\r",
+							"                            \"sorted\": {\"type\": \"boolean\"}\r",
+							"                        },\r",
+							"                        \"required\": [\"empty\", \"unsorted\", \"sorted\"]\r",
+							"                    },\r",
+							"                    \"offset\": {\"type\": \"integer\"},\r",
+							"                    \"paged\": {\"type\": \"boolean\"},\r",
+							"                    \"unpaged\": {\"type\": \"boolean\"}\r",
+							"                },\r",
+							"                \"required\": [\"pageNumber\", \"pageSize\", \"sort\", \"offset\", \"paged\", \"unpaged\"]\r",
+							"            },\r",
+							"            \"totalPages\": {\"type\": \"integer\"},\r",
+							"            \"totalElements\": {\"type\": \"integer\"},\r",
+							"            \"last\": {\"type\": \"boolean\"},\r",
+							"            \"size\": {\"type\": \"integer\"},\r",
+							"            \"number\": {\"type\": \"integer\"},\r",
+							"            \"sort\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"empty\": {\"type\": \"boolean\"},\r",
+							"                    \"unsorted\": {\"type\": \"boolean\"},\r",
+							"                    \"sorted\": {\"type\": \"boolean\"}\r",
+							"                },\r",
+							"                \"required\": [\"empty\", \"unsorted\", \"sorted\"]\r",
+							"            },\r",
+							"            \"numberOfElements\": {\"type\": \"integer\"},\r",
+							"            \"first\": {\"type\": \"boolean\"},\r",
+							"            \"empty\": {\"type\": \"boolean\"}\r",
+							"        },\r",
+							"        \"required\": [\"content\", \"pageable\", \"totalPages\", \"totalElements\", \"last\", \"size\", \"number\", \"sort\", \"numberOfElements\", \"first\", \"empty\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -72,11 +234,49 @@
 		},
 		{
 			"name": "Get By Category Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"array\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"title\": {\"type\": \"string\"},\r",
+							"                \"description\": {\"type\": \"string\"},\r",
+							"                \"url\": {\"type\": \"string\"},\r",
+							"                \"publishDate\": {\"type\": \"string\"},\r",
+							"                \"views\": {\"type\": \"integer\"},\r",
+							"                \"favoritedBy\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\"type\": \"string\"}\r",
+							"                },\r",
+							"                \"category\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/videos/category/Action",
+					"raw": "localhost:8080/api/videos/category/65b6ecd400a90bf49c1f28bf",
 					"host": [
 						"localhost"
 					],
@@ -85,7 +285,7 @@
 						"api",
 						"videos",
 						"category",
-						"Action"
+						"65b6ecd400a90bf49c1f28bf"
 					]
 				}
 			},
@@ -93,6 +293,44 @@
 		},
 		{
 			"name": "Get A Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"title\": {\"type\": \"string\"},\r",
+							"                \"description\": {\"type\": \"string\"},\r",
+							"                \"url\": {\"type\": \"string\"},\r",
+							"                \"publishDate\": {\"type\": \"string\"},\r",
+							"                \"views\": {\"type\": \"integer\"},\r",
+							"                \"favoritedBy\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\"type\": \"string\"}\r",
+							"                },\r",
+							"                \"category\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -109,7 +347,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/videos/65a489ac8b297a91518fa75b",
+					"raw": "localhost:8080/api/videos/65b6ecd400a90bf49c1f28c4",
 					"host": [
 						"localhost"
 					],
@@ -117,7 +355,7 @@
 					"path": [
 						"api",
 						"videos",
-						"65a489ac8b297a91518fa75b"
+						"65b6ecd400a90bf49c1f28c4"
 					]
 				}
 			},
@@ -125,6 +363,44 @@
 		},
 		{
 			"name": "Create A Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"title\": {\"type\": \"string\"},\r",
+							"                \"description\": {\"type\": \"string\"},\r",
+							"                \"url\": {\"type\": \"string\"},\r",
+							"                \"publishDate\": {\"type\": \"string\"},\r",
+							"                \"views\": {\"type\": \"integer\"},\r",
+							"                \"favoritedBy\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\"type\": \"string\"}\r",
+							"                },\r",
+							"                \"category\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -153,6 +429,44 @@
 		},
 		{
 			"name": "Udate a Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"title\": {\"type\": \"string\"},\r",
+							"                \"description\": {\"type\": \"string\"},\r",
+							"                \"url\": {\"type\": \"string\"},\r",
+							"                \"publishDate\": {\"type\": \"string\"},\r",
+							"                \"views\": {\"type\": \"integer\"},\r",
+							"                \"favoritedBy\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\"type\": \"string\"}\r",
+							"                },\r",
+							"                \"category\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -166,7 +480,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/videos/6589f29c02d80a593cc9e80c",
+					"raw": "localhost:8080/api/videos/65b7b4e6b0c0f1248bf3a85a",
 					"host": [
 						"localhost"
 					],
@@ -174,7 +488,7 @@
 					"path": [
 						"api",
 						"videos",
-						"6589f29c02d80a593cc9e80c"
+						"65b7b4e6b0c0f1248bf3a85a"
 					]
 				}
 			},
@@ -182,12 +496,47 @@
 		},
 		{
 			"name": "Favorite a Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"id\": {\"type\": \"string\"},\r",
+							"            \"title\": {\"type\": \"string\"},\r",
+							"            \"description\": {\"type\": \"string\"},\r",
+							"            \"url\": {\"type\": \"string\"},\r",
+							"            \"publishDate\": {\"type\": \"string\"},\r",
+							"            \"views\": {\"type\": \"integer\"},\r",
+							"            \"favoritedBy\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"items\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"category\": {\"type\": [\"string\", \"null\"]}\r",
+							"        },\r",
+							"        \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\": \"65b2c7cb4401495c72aabcc1\",\r\n    \"videoId\": \"65a489ac8b297a91518fa75b\"\r\n}",
+					"raw": "{\r\n    \"userId\": \"65b6ecd400a90bf49c1f28c2\",\r\n    \"videoId\": \"65b7b4e6b0c0f1248bf3a85a\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -212,12 +561,47 @@
 		},
 		{
 			"name": "Unfavorite a Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"id\": {\"type\": \"string\"},\r",
+							"            \"title\": {\"type\": \"string\"},\r",
+							"            \"description\": {\"type\": \"string\"},\r",
+							"            \"url\": {\"type\": \"string\"},\r",
+							"            \"publishDate\": {\"type\": \"string\"},\r",
+							"            \"views\": {\"type\": \"integer\"},\r",
+							"            \"favoritedBy\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"items\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"category\": {\"type\": [\"string\", \"null\"]}\r",
+							"        },\r",
+							"        \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\": \"65b2c7cb4401495c72aabcc1\",\r\n    \"videoId\": \"65a489ac8b297a91518fa75b\"\r\n}",
+					"raw": "{\r\n    \"userId\": \"65b6ecd400a90bf49c1f28c2\",\r\n    \"videoId\": \"65b7b4e6b0c0f1248bf3a85a\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -242,11 +626,25 @@
 		},
 		{
 			"name": "Delete a Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/videos/6589f47632782204dfc47fe8",
+					"raw": "localhost:8080/api/videos/65b7b4e6b0c0f1248bf3a85a",
 					"host": [
 						"localhost"
 					],
@@ -254,7 +652,7 @@
 					"path": [
 						"api",
 						"videos",
-						"6589f47632782204dfc47fe8"
+						"65b7b4e6b0c0f1248bf3a85a"
 					]
 				}
 			},

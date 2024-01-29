@@ -8,6 +8,39 @@
 	"item": [
 		{
 			"name": "Get All Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"array\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"name\": {\"type\": \"string\"},\r",
+							"                \"email\": {\"type\": \"string\"},\r",
+							"                \"favorites\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\"type\": \"string\"}\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"name\", \"email\", \"favorites\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -27,6 +60,32 @@
 		},
 		{
 			"name": "Create a User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"name\": {\"type\": \"string\"},\r",
+							"            \"email\": {\"type\": \"string\"}\r",
+							"        },\r",
+							"        \"required\": [\"name\", \"email\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -55,11 +114,37 @@
 		},
 		{
 			"name": "Get a User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"name\": {\"type\": \"string\"},\r",
+							"            \"email\": {\"type\": \"string\"}\r",
+							"        },\r",
+							"        \"required\": [\"name\", \"email\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/users/65b2c7cb4401495c72aabcc1",
+					"raw": "localhost:8080/api/users/65b7b2c4b0c0f1248bf3a859",
 					"host": [
 						"localhost"
 					],
@@ -67,7 +152,80 @@
 					"path": [
 						"api",
 						"users",
-						"65b2c7cb4401495c72aabcc1"
+						"65b7b2c4b0c0f1248bf3a859"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Recommendations for a User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"array\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"title\": {\"type\": \"string\"},\r",
+							"                \"description\": {\"type\": \"string\"},\r",
+							"                \"url\": {\"type\": \"string\"},\r",
+							"                \"publishDate\": {\"type\": \"string\"},\r",
+							"                \"views\": {\"type\": \"integer\"},\r",
+							"                \"favoritedBy\": {\r",
+							"                    \"type\": [\"array\", \"null\"],\r",
+							"                    \"items\": {\r",
+							"                        \"type\": \"object\",\r",
+							"                        \"properties\": {\r",
+							"                            \"timestamp\": {\"type\": \"integer\"},\r",
+							"                            \"date\": {\"type\": \"string\"}\r",
+							"                        },\r",
+							"                        \"required\": [\"timestamp\", \"date\"]\r",
+							"                    }\r",
+							"                },\r",
+							"                \"category\": {\r",
+							"                    \"type\": [\"object\", \"null\"],\r",
+							"                    \"properties\": {\r",
+							"                        \"timestamp\": {\"type\": \"integer\"},\r",
+							"                        \"date\": {\"type\": \"string\"}\r",
+							"                    },\r",
+							"                    \"required\": [\"timestamp\", \"date\"]\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"title\", \"description\", \"url\", \"publishDate\", \"views\", \"favoritedBy\", \"category\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/users/recommendation/65b6ecd400a90bf49c1f28c2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"recommendation",
+						"65b6ecd400a90bf49c1f28c2"
 					]
 				}
 			},
@@ -75,6 +233,32 @@
 		},
 		{
 			"name": "Update a User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"name\": {\"type\": \"string\"},\r",
+							"            \"email\": {\"type\": \"string\"}\r",
+							"        },\r",
+							"        \"required\": [\"name\", \"email\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -88,7 +272,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/users/6589fbb24ac9e968138a83f9",
+					"raw": "localhost:8080/api/users/65b7b2c4b0c0f1248bf3a859",
 					"host": [
 						"localhost"
 					],
@@ -96,7 +280,7 @@
 					"path": [
 						"api",
 						"users",
-						"6589fbb24ac9e968138a83f9"
+						"65b7b2c4b0c0f1248bf3a859"
 					]
 				}
 			},
@@ -104,11 +288,24 @@
 		},
 		{
 			"name": "Delete a User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/users/6589fbb24ac9e968138a83f9",
+					"raw": "localhost:8080/api/users/65b7b2c4b0c0f1248bf3a859",
 					"host": [
 						"localhost"
 					],
@@ -116,7 +313,7 @@
 					"path": [
 						"api",
 						"users",
-						"6589fbb24ac9e968138a83f9"
+						"65b7b2c4b0c0f1248bf3a859"
 					]
 				}
 			},

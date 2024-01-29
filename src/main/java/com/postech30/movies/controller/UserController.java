@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -43,10 +44,11 @@ public class UserController {
     @Operation(summary = "Busca de Usuário por nome",
             description = "Busca o Usuário na base de dados do sistema.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuário adicionado"),
+            @ApiResponse(responseCode = "201", description = "Usuário adicionado"),
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PostMapping
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
         return userService.saveUser(userDTO);
     }

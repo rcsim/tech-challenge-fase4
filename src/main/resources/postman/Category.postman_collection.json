@@ -8,6 +8,37 @@
 	"item": [
 		{
 			"name": "Get All Categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"array\",\r",
+							"        \"items\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\"type\": \"string\"},\r",
+							"                \"name\": {\"type\": \"string\"},\r",
+							"                \"description\": {\"type\": \"string\"}\r",
+							"            },\r",
+							"            \"required\": [\"id\", \"name\", \"description\"]\r",
+							"        }\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -27,11 +58,38 @@
 		},
 		{
 			"name": "Get A Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"id\": {\"type\": \"string\"},\r",
+							"            \"name\": {\"type\": \"string\"},\r",
+							"            \"description\": {\"type\": \"string\"}\r",
+							"        },\r",
+							"        \"required\": [\"id\", \"name\", \"description\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/categories/65b56b440c75f588c2abf86a",
+					"raw": "localhost:8080/api/categories/65b6ecd400a90bf49c1f28c1",
 					"host": [
 						"localhost"
 					],
@@ -39,7 +97,7 @@
 					"path": [
 						"api",
 						"categories",
-						"65b56b440c75f588c2abf86a"
+						"65b6ecd400a90bf49c1f28c1"
 					]
 				}
 			},
@@ -47,6 +105,32 @@
 		},
 		{
 			"name": "Update a Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"name\": {\"type\": \"string\"},\r",
+							"            \"description\": {\"type\": \"string\"}\r",
+							"        },\r",
+							"        \"required\": [\"name\", \"description\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -60,7 +144,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/categories/65b56b440c75f588c2abf86a",
+					"raw": "localhost:8080/api/categories/65b6ecd400a90bf49c1f28c1",
 					"host": [
 						"localhost"
 					],
@@ -68,7 +152,7 @@
 					"path": [
 						"api",
 						"categories",
-						"65b56b440c75f588c2abf86a"
+						"65b6ecd400a90bf49c1f28c1"
 					]
 				}
 			},
@@ -76,6 +160,32 @@
 		},
 		{
 			"name": "Create a Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"name\": {\"type\": \"string\"},\r",
+							"            \"description\": {\"type\": \"string\"}\r",
+							"        },\r",
+							"        \"required\": [\"name\", \"description\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -104,11 +214,24 @@
 		},
 		{
 			"name": "Delete A Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/categories/65b6d7ca05c12f06ccc41b69",
+					"raw": "localhost:8080/api/categories/65b7a62eb0c0f1248bf3a855",
 					"host": [
 						"localhost"
 					],
@@ -116,7 +239,7 @@
 					"path": [
 						"api",
 						"categories",
-						"65b6d7ca05c12f06ccc41b69"
+						"65b7a62eb0c0f1248bf3a855"
 					]
 				}
 			},
