@@ -2,7 +2,7 @@
 ## Repositório para o Tech Challenge Fase 4 - Grupo 30
 Este repositório contém o código-fonte e a documentação para o Tech Challenge - Fase 4, desenvolvido pelo Grupo 30.
 
-O projeto consiste em uma aplicação web para exibição de videos utilizando Spring Framework, Spring WebFlux, Spring Boot e Sping Data. A API permite gerenciamento de videos e usuários e principalmnente o streaming the videos utilizando endpoints reativos.
+O projeto consiste em uma aplicação web para exibição de videos utilizando Spring Framework, Spring WebFlux, Spring Boot e Sping Data. A API permite gerenciamento de videos, usuários e principalmnente o streaming the videos utilizando endpoints reativos.
 
 ## 1- Relatório Técnico
 Tecnologias e ferramentas utilizadas
@@ -19,6 +19,7 @@ Tecnologias e ferramentas utilizadas
   * Spring WebFlux
   * OpenAPI
   * Lombok
+  * AWS Java SDK
     
 * Tests:
   * JUnit
@@ -37,9 +38,9 @@ Tecnologias e ferramentas utilizadas
 Configuração de produção utilizando o MongoDB
 https://github.com/rcsim/tech-challenge-fase4/blob/f88aa5295d6df5e0906a2d262845c530d474bad9/src/main/resources/application-dev.properties#L1
 
-Relacionamento entre as entidades:
+O schema e os dados iniciais do banco de dados são criados através do arquivo schema.js:
 
-TODO1
+https://github.com/rcsim/tech-challenge-fase4/blob/e97832c47978104b3421e2ddaad67460fe6773ea/schema.js#L1-L62
 
 ### Container
 
@@ -78,6 +79,7 @@ https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postm
 https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postman/Statistics.postman_collection.json
 https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postman/Users.postman_collection.json
 https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postman/Videos.postman_collection.json
+https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postman/Stream.postman_collection.json
 
 
 ## Streaming the Videos com Deploy AWS S3
@@ -89,4 +91,8 @@ Para gerenciar vídeos de forma eficiente, utilizamos o Amazon S3 para armazenam
 
 ## Conclusões 
 
-TODO3
+O projeto foi concluído com êxito, atendendo integralmente aos requisitos propostos no desafio. A escolha criteriosa das tecnologias e ferramentas desempenhou um papel fundamental, proporcionando um ambiente propício para o desenvolvimento eficiente e robusto do sistema. Destaca-se o enfoque dedicado à implementação de endpoints reativos com Spring WebFlux, constituindo o principal ponto de aprendizado nesta etapa. Vale ressaltar que, devido à novidade desse paradigma para alguns membros do grupo, foram necessários esforços adicionais para assimilação e aplicação efetiva.
+
+As principais dificuldades encontradas estão relacionadas à incorporação do protocolo HLS para o streaming de vídeos e à hospedagem destes na AWS S3. Conforme mencionado anteriormente, o paradigma de programação reativa também se configurou como um ponto de atenção, dada sua novidade para parte dos integrantes. Essas questões exigiram uma abordagem cuidadosa e estratégica para superação, demonstrando a capacidade do grupo em lidar com desafios complexos.
+
+
