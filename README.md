@@ -82,10 +82,15 @@ https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postm
 https://github.com/rcsim/tech-challenge-fase4/blob/main/src/main/resources/postman/Stream.postman_collection.json
 
 
-### Testes de Unidade 
+### Testes de Unidade  e Integração
 Utilizando as bibliotecas JUnit e JMockit, implementamos os testes de unidade, chegando a 93% de cobertura das classes do sistema:
 
 ![image](https://github.com/rcsim/tech-challenge-fase4/assets/30301531/fcc79848-91b5-4e5a-a17c-2eaacaca7966)
+
+Para testes de integração utilizamos o Postman:
+
+![image](https://github.com/rcsim/tech-challenge-fase4/assets/30301531/f1a2a3b0-f81b-4f51-a1ac-ae599bf3b312)
+
 
 ## Streaming the Videos com Deploy AWS S3
 Para gerenciar vídeos de forma eficiente, utilizamos o Amazon S3 para armazenamento e o AWS Java SDK para facilitar a interação com o S3. Os vídeos são enviados e organizados em buckets no S3, aproveitando sua escalabilidade e durabilidade. O AWS Java SDK simplifica a integração, proporcionando uma maneira fácil e segura de baixar vídeos para transmissão. A combinação dessas tecnologias garante uma recuperação eficiente dos vídeos armazenados, permitindo uma experiência de transmissão suave e confiável. A segurança é mantida por meio de políticas de controle de acesso, garantindo a proteção dos vídeos armazenados no S3.
