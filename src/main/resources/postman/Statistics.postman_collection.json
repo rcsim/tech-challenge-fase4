@@ -8,6 +8,33 @@
 	"item": [
 		{
 			"name": "Get Statistics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate JSON schema\", function () {\r",
+							"    var schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"total\": {\"type\": \"integer\"},\r",
+							"            \"favorited\": {\"type\": \"integer\"},\r",
+							"            \"average\": {\"type\": \"number\"}\r",
+							"        },\r",
+							"        \"required\": [\"total\", \"favorited\", \"average\"]\r",
+							"    };\r",
+							"    \r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],

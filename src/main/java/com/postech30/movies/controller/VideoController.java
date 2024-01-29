@@ -117,7 +117,7 @@ public class VideoController {
         return videoService.favoriteVideo(favoriteVideoDTO);
     }
 
-    @Operation(summary = "Remove favorita um vídeo", description = "Remove Favorita um vídeo na base de dados do sistema.")
+    @Operation(summary = "Remove favorito de um vídeo", description = "Remove Favorita um vídeo na base de dados do sistema.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Vídeo removido dos favoritado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Request incorreto"),

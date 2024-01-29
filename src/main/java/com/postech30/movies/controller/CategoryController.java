@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -44,6 +45,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Request incorreto"),
             @ApiResponse(responseCode = "422", description = "Parâmetro não pode ser nulo")})
     @PostMapping
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<CategoryDTO> saveCategory(@RequestBody CategoryDTO categoryDTO) {
         return categoryService.saveCategory(categoryDTO);
     }
